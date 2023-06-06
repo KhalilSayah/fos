@@ -1,8 +1,15 @@
-FROM python:3.11.3-alpine
+FROM python:3.9-alpine
+
+RUN apk --update add --no-cache \
+    gcc \
+    musl-dev \
+    linux-headers \
+    g++
+    
 COPY requirements.txt requirements.txt 
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt  
-COPY ..
+COPY . .
 RUN apt-get update
 RUN apt-get -y install cron
 
